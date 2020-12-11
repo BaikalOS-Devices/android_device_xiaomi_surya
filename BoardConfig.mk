@@ -86,6 +86,10 @@ VENDOR_SECURITY_PATCH := 2021-04-01
 # Sepolicy
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
+# Shims
+TARGET_LD_SHIM_LIBS := \
+    system/lib/libcameraservice.so|libmedia_jni_shim.so
+
 # Verified Boot
 BOARD_AVB_VBMETA_SYSTEM := system system_ext product
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
