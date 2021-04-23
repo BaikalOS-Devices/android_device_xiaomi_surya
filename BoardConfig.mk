@@ -41,7 +41,7 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_surya
 # Kernel
 TARGET_KERNEL_CONFIG := vendor/surya_defconfig
 TARGET_KERNEL_SOURCE := kernel/xiaomi/surya
-TARGET_KERNEL_ADDITIONAL_FLAGS += LD=ld.lld AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip
+TARGET_KERNEL_ADDITIONAL_FLAGS += AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
