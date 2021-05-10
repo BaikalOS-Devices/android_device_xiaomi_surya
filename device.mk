@@ -96,6 +96,10 @@ PRODUCT_PACKAGES += \
     KarnaFrameworks \
     NoCutoutOverlay \
     NotchBarKiller
+    
+# PartsBin
+PRODUCT_PACKAGES += \
+    PartsBin
 
 # Partitions
 PRODUCT_BUILD_SUPER_PARTITION := false
