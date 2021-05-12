@@ -1,0 +1,15 @@
+# Refresh rate stuffs
+109721/2 http://gerrit.aicp-rom.com packages/resources/deviceparts
+109722/6 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109723/7 http://gerrit.aicp-rom.com packages/apps/PartsBin
+
+# Partsbin stuffs
+109730/1 http://gerrit.aicp-rom.com frameworks/opt/aicpgear
+109731/6 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109732/6 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109733/5 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109734/5 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109735/5 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109736/5 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109755/4 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109759/1 http://gerrit.aicp-rom.com packages/apps/PartsBin
