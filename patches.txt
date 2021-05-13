@@ -6,7 +6,7 @@
 # Partsbin stuffs
 109730/1 http://gerrit.aicp-rom.com frameworks/opt/aicpgear
 109731/6 http://gerrit.aicp-rom.com packages/apps/PartsBin
-109732/6 http://gerrit.aicp-rom.com packages/apps/PartsBin
+109732/7 http://gerrit.aicp-rom.com packages/apps/PartsBin
 109733/5 http://gerrit.aicp-rom.com packages/apps/PartsBin
 109734/5 http://gerrit.aicp-rom.com packages/apps/PartsBin
 109735/5 http://gerrit.aicp-rom.com packages/apps/PartsBin
