@@ -12,6 +12,10 @@ ro.vendor.display.ad.hdr_calib_data=/vendor/etc/hdr_config.cfg
 ro.vendor.display.sensortype=2
 ro.surface_flinger.has_wide_color_display=false
 
+# DRM
+drm.service.enabled=true
+media.mediadrmservice.enable=true
+
 # HVDCP
 persist.vendor.cp.fcc_main_ua=400000
 persist.vendor.cp.taper_term_mv=6500
