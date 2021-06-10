@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The LineageOS Project
+ * Copyright (C) 2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,25 +19,13 @@ package org.lineageos.settings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 
-import org.lineageos.settings.dirac.DiracUtils;
-import org.lineageos.settings.doze.DozeUtils;
-
-public class BootCompletedReceiver extends BroadcastReceiver {
+public class EarlyStartReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        // Refresh rate
-        // RefreshRateUtils.setFPS(RefreshRateUtils.getRefreshRate(context));
-
-        // Dirac
-        DiracUtils.initialize(context);
-
-        // Doze
-        DozeUtils.checkDozeService(context);
-        DozeUtils.enableDoze(context, DozeUtils.isDozeEnabled(context));
-
-        // Thermal Profiles
-        // ThermalUtils.initialize(context);
     }
 }

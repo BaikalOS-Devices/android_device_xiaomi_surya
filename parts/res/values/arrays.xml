@@ -12,6 +12,7 @@
      limitations under the License.
 -->
 <resources>
+
     <!-- Values for Dirac headset pref -->
     <string-array name="dirac_headset_pref_entries" translatable="false">
         <item>@string/dirac_headset_default</item>
@@ -67,6 +68,7 @@
     <!-- Values for Dirac preset pref -->
     <string-array name="dirac_preset_pref_entries" translatable="false">
         <item>@string/dirac_preset_default</item>
+        <item>@string/dirac_preset_manual</item>
         <item>@string/dirac_preset_rock</item>
         <item>@string/dirac_preset_jazz</item>
         <item>@string/dirac_preset_pop</item>
@@ -81,6 +83,7 @@
 
     <string-array name="dirac_preset_pref_values" translatable="false">
         <item>"0,0,0,0,0,0,0"</item>
+        <item>"manual"</item>
         <item>"4,2,-2,0,-2,-2,4"</item>
         <item>"0,0,0,-2,-3,0,0"</item>
         <item>"0,-3,-5,0,0,-3,0"</item>
@@ -92,4 +95,20 @@
         <item>"0,4,2,0,-2,-2,4"</item>
         <item>"2,0,0,-2,-4,0,0"</item>
     </string-array>
+
+    <!-- Values for Dirac preset pref -->
+    <string-array name="dirac_scenario_pref_entries" translatable="false">
+        <item>@string/dirac_scenario_music</item>
+        <item>@string/dirac_scenario_movie</item>
+        <item>@string/dirac_scenario_voice</item>
+        <item>@string/dirac_scenario_smart</item>
+    </string-array>
+
+    <string-array name="dirac_scenario_pref_values" translatable="false">
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+    </string-array>
+
 </resources>

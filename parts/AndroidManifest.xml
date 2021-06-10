@@ -3,6 +3,7 @@
     package="org.lineageos.settings"
     android:versionCode="3"
     android:versionName="3.0"
+    android:persistent="true"
     android:sharedUserId="android.uid.system">
 
     <uses-permission android:name="android.permission.DEVICE_POWER" />
@@ -12,10 +13,17 @@
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
+
     <application
         android:allowBackup="true"
-        android:label="@string/device_settings_app_name"
-        android:persistent="true">
+        android:label="@string/device_settings_app_name">
+
+        <receiver android:name=".EarlyStartReceiver" android:directBootAware="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <receiver android:name=".BootCompletedReceiver">
             <intent-filter android:priority="1000">
@@ -23,6 +31,39 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".DevicePreferenceActivity"
+            android:label="@string/device_specific_settings_title"
+            android:theme="@style/Theme.Main">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.display" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/device_specific_settings_summary" />
+        </activity>
+
+        <activity
+            android:name=".doze.DozeSettingsActivity"
+            android:label="@string/ambient_display_title"
+            android:theme="@style/Theme.Main">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.display" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/device_settings_app_name" />
+        </activity>
+
+        <service android:name=".doze.DozeService"
+                 android:permission="XiaomiDozeService">
+        </service>
 
         <activity
             android:name=".dirac.DiracActivity"
@@ -37,24 +78,23 @@
                        android:resource="@string/dirac_summary" />
         </activity>
 
-        <activity
+        <!-- activity
             android:name=".thermal.ThermalActivity"
             android:label="@string/thermal_title"
-            android:icon="@drawable/ic_thermal_settings"
             android:theme="@style/Theme.Main">
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
             </intent-filter>
             <meta-data
                 android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.system" />
+                android:value="com.android.settings.category.ia.battery" />
             <meta-data
                 android:name="com.android.settings.summary"
                 android:resource="@string/thermal_summary" />
             <meta-data
                 android:name="com.android.settings.order"
                 android:value="1" />
-        </activity>
+        </activity -->
 
         <activity
             android:name=".speaker.ClearSpeakerActivity" 
@@ -67,21 +107,10 @@
                        android:value="com.android.settings.category.ia.sound" />
         </activity>
 
-        <service
+        <!-- service
             android:name=".thermal.ThermalService"
             android:permission="ThermalService">
-        </service>
-
-        <service
-            android:name=".dirac.DiracTileService"
-            android:icon="@drawable/ic_headphone"
-            android:label="@string/dirac_qs_tile_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
+        </service -->
 
     </application>
 </manifest>
-

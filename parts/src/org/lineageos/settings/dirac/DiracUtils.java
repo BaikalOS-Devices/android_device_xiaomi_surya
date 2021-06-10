@@ -29,13 +29,25 @@ public final class DiracUtils {
     public static void initialize(Context context) {
         if (!mInitialized) {
             mContext = context;
-            mDiracSound = new DiracSound(0, 0);
+            mDiracSound = new DiracSound(1, 1);
             mInitialized = true;
         }
     }
 
     protected static void setMusic(boolean enable) {
         mDiracSound.setMusic(enable ? 1 : 0);
+    }
+
+    protected static void setMovie(boolean enable) {
+        mDiracSound.setMovie(enable ? 1 : 0);
+    }
+
+    protected static void setSurround(int level) {
+        mDiracSound.setSurround(level);
+    }
+
+    protected static void setVoice(int level) {
+        mDiracSound.setVoice(level);
     }
 
     protected static boolean isDiracEnabled() {
@@ -50,7 +62,39 @@ public final class DiracUtils {
         }
     }
 
-    protected static void setHeadsetType(int paramInt) {
-         mDiracSound.setHeadsetType(paramInt);
+    protected static String getLevel() {
+        String selected = "";
+        for (int band = 0; band <= 6; band++) {
+            int temp = (int) mDiracSound.getLevel(band);
+            selected += String.valueOf(temp);
+            if (band != 6) selected += ",";
+        }
+        return selected;
     }
+
+    protected static void setLevel(int band, int level) {
+        mDiracSound.setLevel(band, Float.valueOf(level));
+    }
+
+    protected static int getLevel(int band) {
+        return (int)mDiracSound.getLevel(band);
+    }
+
+    protected static void setHeadsetType(int paramInt) {
+        mDiracSound.setHeadsetType(paramInt);
+    }
+
+    protected static void setScenario(int paramInt) {
+        mDiracSound.setScenario(paramInt);
+    }
+
+
+    protected static void setTestInt(String index, String value) {
+        mDiracSound.setInt(index,value);
+    }
+
+    protected static void setTestString(String index, String value) {
+        mDiracSound.setString(index,value);
+    }
+
 }

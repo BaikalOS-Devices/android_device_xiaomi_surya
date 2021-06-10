@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.thermal;
+package org.lineageos.settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-public class ThermalActivity extends PreferenceActivity {
-
-    private static final String TAG_THERMAL = "thermal";
-
+public class DevicePreferenceActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getFragmentManager().beginTransaction().replace(android.R.id.content,
-                new ThermalSettingsFragment(), TAG_THERMAL).commit();
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new DevicePreferenceFragment())
+                .commit();
     }
 }

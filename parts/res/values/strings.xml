@@ -12,11 +12,26 @@
      limitations under the License.
 -->
 <resources>
+    <!-- POCO X3 specific settings -->
+    <string name="device_specific_settings_title">Device-specific settings</string>
+    <string name="device_specific_settings_summary">Cutout and refresh rate configuration</string>
+    <string name="device_min_refresh_rate">Minimum Refresh Rate</string>
+    <string name="device_hide_camera_cutout">Hide camera cutout</string>
+    <string name="msg_device_need_restart">Please restart device for this to take effect.</string>
+
+    <string name="device_dynamic_fps">Dynamic FPS</string>
+    <string name="device_blur">Blur effect</string>
+    <string name="device_blur_summary">Require restart!</string>
+
+    <string name="device_gpu_scale">Scale GPU</string>
+    <string name="device_gpu_scale_summary">Scale GPU frequency based on current refresh rate</string>
+
     <!-- Dirac settings -->
     <string name="dirac_title">Mi Sound Enhancer</string>
     <string name="dirac_summary">Optimize audio quality</string>
     <string name="dirac_headset_title">Choose headphones type</string>
     <string name="dirac_preset_title">Choose a preset</string>
+    <string name="dirac_scenario_title">Scenario</string>
 
     <!-- Dirac settings: Headset types -->
     <string name="dirac_headset_default">Default</string>
@@ -43,6 +58,7 @@
     <string name="dirac_headset_earphone">Mi Earphones</string>
 
     <!-- Dirac settings: Equalizer presets -->
+    <string name="dirac_preset_manual">Manual</string>
     <string name="dirac_preset_default">Default</string>
     <string name="dirac_preset_rock">Rock</string>
     <string name="dirac_preset_jazz">Jazz</string>
@@ -55,21 +71,29 @@
     <string name="dirac_preset_dance">Dance</string>
     <string name="dirac_preset_metal">Metal</string>
 
-     <!-- QS tile title -->
-    <string name="dirac_qs_tile_title">Mi Sound Enhancer</string>
+    <string name="dirac_scenario_voice">Voice</string>
+    <string name="dirac_scenario_music">Music</string>
+    <string name="dirac_scenario_movie">Movie</string>
+    <string name="dirac_scenario_smart">Auto</string>
 
-    <!-- Thermal Profiles -->
-    <string name="thermal_title">Thermal Profiles</string>
-    <string name="thermal_summary">Adjust per-app thermal profiles for optimum performance</string>
-    <string name="thermal_default">Default</string>
-    <string name="thermal_benchmark">Benchmark</string>
-    <string name="thermal_camera">Camera</string>
-    <string name="thermal_dialer">Dialer</string>
-    <string name="thermal_gaming">Gaming</string>
+    <string name="dirac_surround_level_title">Surround</string>
+    <string name="dirac_surround_level_summary">Surround sound level</string>
+    <string name="dirac_voice_level_title">Vocal</string>
+    <string name="dirac_voice_level_summary">Vocal accent level</string>
+
+    <string name="dirac_eq_settings">Equalizer</string>
+    <string name="dirac_eq_band_0">65 Hz</string>
+    <string name="dirac_eq_band_1">160 Hz</string>
+    <string name="dirac_eq_band_2">400 Hz</string>
+    <string name="dirac_eq_band_3">1 KHz</string>
+    <string name="dirac_eq_band_4">2.5 KHz</string>
+    <string name="dirac_eq_band_5">6 KHz</string>
+    <string name="dirac_eq_band_6">14 KHz</string>
 
     <!-- Clear Speaker -->
     <string name="clear_speaker_title">Clear speaker</string>
     <string name="clear_speaker_summary">Play a 30-second audio to clear the speaker</string>
     <string name="clear_speaker_description">Run this feature once or twice if you find that your speaker is lightly blocked by dust. Set media volume to maximum.\n\nIf the speaker is blocked heavily, run this feature 2-5 times while shaking your device with the speaker facing downwards.</string>
+
 
 </resources>
