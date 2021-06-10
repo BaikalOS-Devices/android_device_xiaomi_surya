@@ -1,0 +1,199 @@
+on post-fs && property:ro.product.device=karna
+    mount none /dev/null /system/app/NfcNci/NfcNci.apk bind
+    mount none /dev/null /vendor/etc/permissions/android.hardware.nfc.xml bind
+    mount none /dev/null /vendor/etc/permissions/android.hardware.nfc.hce.xml bind
+    mount none /dev/null /vendor/etc/permissions/android.hardware.nfc.hcef.xml bind
+    mount none /dev/null /vendor/etc/permissions/android.hardware.nfc.uicc.xml bind
+    setprop ro.power_profile.override power_profile_karna
+
+on init 
+    chown system system /sys/devices/platform/soc/soc:qcom,dsi-display/dsi_display_hbm
+    chown system system /sys/devices/platform/soc/soc:qcom,dsi-display/dsi_display_cabc
+    chown system system /sys/devices/platform/soc/soc:qcom,dsi-display/dsi_display_cabc_movie
+    chown system system /sys/devices/platform/soc/soc:qcom,dsi-display/dsi_display_cabc_still  
+
+    chown system system /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+    chown system system /sys/module/cpu_boost/parameters/dynamic_stune_boost
+    chown system system /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms
+    chown system system /dev/stune/top-app/schedtune.sched_boost
+
+
+    # Create cgroup mount point for memory
+    mkdir /sys/fs/cgroup/memory/bg 0750 root system
+    write /sys/fs/cgroup/memory/bg/memory.swappiness 140
+    write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
+    chown root system /sys/fs/cgroup/memory/bg/tasks
+    chmod 0660 /sys/fs/cgroup/memory/bg/tasks
+
+on fs
+    chmod 0775 /mnt/vendor/persist/alarm/data
+    rmdir /mnt/vendor/persist/alarm/data
+
+    chmod 0775 /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/alarm 0775 system system
+    chmod 0775 /mnt/vendor/persist/alarm
+    chown system system /mnt/vendor/persist/alarm
+
+
+on property:ro.boot.hwc=*
+    setprop vendor.boot.hwc ${ro.boot.hwc}   
+
+on property:init.svc.vendor.cnss_diag=running
+    stop vendor.cnss_diag
+
+on property:init.svc.vendor.tcpdump=running
+    stop vendor.tcpdump
+
+on property:persist.sys.device_provisioned=1
+    setprop dalvik.vm.dex2oat-cpu-set 0,1,2,3,4,5,6,7
+    setprop dalvik.vm.dex2oat-threads 8
+
+on late-init
+    # Start services for bootanim
+    start surfaceflinger
+    start bootanim
+    start vendor.hwcomposer-2-3
+    start vendor.configstore-hal
+    start vendor.qti.hardware.display.allocator
+
+# perf tuning
+on property:vendor.post_boot.parsed=1
+
+    # ZRAM setup
+    write /sys/block/zram0/comp_algorithm lz4
+    write /sys/block/zram0/max_comp_streams 8
+    write /proc/sys/vm/page-cluster 0
+
+    # Override readahead to 128KiB
+    write /sys/block/dm-0/queue/iostats 0
+    write /sys/block/dm-1/queue/iostats 0
+    write /sys/block/dm-2/queue/iostats 0
+    write /sys/block/dm-3/queue/iostats 0
+
+    write /sys/block/dm-0/queue/nr_requests 128
+    write /sys/block/dm-1/queue/nr_requests 128
+    write /sys/block/dm-2/queue/nr_requests 128
+    write /sys/block/dm-3/queue/nr_requests 128
+
+    write /sys/block/dm-0/queue/read_ahead_kb 128
+    write /sys/block/dm-1/queue/read_ahead_kb 128
+    write /sys/block/dm-2/queue/read_ahead_kb 128
+    write /sys/block/dm-3/queue/read_ahead_kb 128
+
+    write /sys/block/mmcblk0/queue/iostats 0
+    write /sys/block/mmcblk0/queue/nr_requests 128
+    write /sys/block/mmcblk0/queue/read_ahead_kb 128
+
+    write /sys/block/sda/queue/iostats 0
+    write /sys/block/sdb/queue/iostats 0
+    write /sys/block/sdc/queue/iostats 0
+    write /sys/block/sdd/queue/iostats 0
+    write /sys/block/sde/queue/iostats 0
+    write /sys/block/sdf/queue/iostats 0
+
+    write /sys/block/sda/queue/nr_requests 128
+    write /sys/block/sdb/queue/nr_requests 128
+    write /sys/block/sdc/queue/nr_requests 128
+    write /sys/block/sdd/queue/nr_requests 128
+    write /sys/block/sde/queue/nr_requests 128
+    write /sys/block/sdf/queue/nr_requests 128
+
+    write /sys/block/sda/queue/read_ahead_kb 128
+    write /sys/block/sdb/queue/read_ahead_kb 128
+    write /sys/block/sdc/queue/read_ahead_kb 128
+    write /sys/block/sdd/queue/read_ahead_kb 128
+    write /sys/block/sde/queue/read_ahead_kb 128
+    write /sys/block/sdf/queue/read_ahead_kb 128
+
+    #mkdir /dev/cpuset/foreground/boost
+    #write /dev/cpuset/foreground/boost/cpus 0-7
+    #write /dev/cpuset/foreground/boost/mems 0
+    #chown system system /dev/cpuset/foreground/boost
+    #chown system system /dev/cpuset/foreground/boost/tasks
+    #chmod 0664 /dev/cpuset/foreground/boost/tasks
+
+
+    # Add a cpuset for the camera daemon
+    mkdir /dev/cpuset/camera-daemon
+    write /dev/cpuset/camera-daemon/cpus 0-7
+    write /dev/cpuset/camera-daemon/mems 0
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
+    chmod 0660 /dev/cpuset/camera-daemon/tasks
+
+    # Setup runtime cpusets
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-7
+    write /dev/cpuset/background/cpus 0-7
+    write /dev/cpuset/system-background/cpus 0-7
+    write /dev/cpuset/restricted/cpus 0-7
+
+    # Setup default schedTune value for foreground/top-app
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost 5
+    write /dev/stune/top-app/schedtune.prefer_idle 1
+
+    # Setup dynamic stune boost
+    write /sys/module/cpu_boost/parameters/dynamic_stune_boost 15
+    write /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms 1000
+    write /dev/stune/top-app/schedtune.sched_boost 15
+
+    # Setup CPU frequencies
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_min_freq 300000
+
+    # Setup schedutil ratelimits
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/down_rate_limit_us 20000
+
+    # Enable schedutil predicted-load boosting
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl 1
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/pl 1
+
+    # Report max frequency to unity tasks
+    write /proc/sys/kernel/sched_lib_name "UnityMain,libunity.so"
+    write /proc/sys/kernel/sched_lib_mask_force 255
+
+    # Set allocstall_threshold to 0
+    # Set swappiness to 100
+    write /sys/module/vmpressure/parameters/allocstall_threshold 0
+    write /proc/sys/vm/swappiness 100
+
+    # Reinit lmkd to reconfigure lmkd properties
+    setprop lmkd.reinit 1
+
+    # EAS
+    write /proc/sys/kernel/sched_upmigrate 95
+    write /proc/sys/kernel/sched_downmigrate 85
+    write /proc/sys/kernel/sched_walt_rotate_big_tasks 0
+    write /proc/sys/kernel/sched_group_downmigrate 85
+    write /proc/sys/kernel/sched_group_upmigrate 100
+    write /proc/sys/kernel/sched_walt_rotate_big_tasks 1
+    write /proc/sys/kernel/sched_child_runs_first 1
+    write /proc/sys/kernel/sched_tunable_scaling 1
+    write /proc/sys/kernel/sched_boost 0
+    write /proc/sys/kernel/sched_conservative_pl 1
+
+    # Setup default schedtune values for foreground/top-app
+    write /dev/stune/schedtune.boost 0
+    write /dev/stune/schedtune.prefer_idle 0
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost 1
+    write /dev/stune/top-app/schedtune.prefer_idle 1
+
+
+    # Reduce CPU input boost duration
+    write /sys/module/cpu_boost/parameters/input_boost_ms 500
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/not_preferred "0 1 1 1 1 1"
+    write /sys/devices/system/cpu/cpu6/core_ctl/not_preferred "0 1"
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 6
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus 2
+
+

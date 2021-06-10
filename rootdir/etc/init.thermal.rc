@@ -1,0 +1,37 @@
+# Balance (default profile)
+on property:baikal.eng.therm.profile=balance
+    write /sys/class/thermal/thermal_message/sconfig 0
+    setprop "baikal.eng.therm.cur_profile" "balance"
+
+# NoLimits
+on property:baikal.eng.therm.profile=nolimits
+    write /sys/class/thermal/thermal_message/sconfig 10
+    setprop "baikal.eng.therm.cur_profile" "nolimits"
+
+# Phone
+on property:baikal.eng.therm.profile=incall
+    write /sys/class/thermal/thermal_message/sconfig 8
+    setprop "baikal.eng.therm.cur_profile" "incall"
+
+# Gaming
+on property:baikal.eng.therm.profile=gaming
+    write /sys/class/thermal/thermal_message/sconfig 13
+    setprop "baikal.eng.therm.cur_profile" "gaming"
+
+# Camera
+on property:baikal.eng.therm.profile=camera
+    write /sys/class/thermal/thermal_message/sconfig 15
+    setprop "baikal.eng.therm.cur_profile" "camera"
+
+
+# Cool
+on property:baikal.eng.therm.profile=cool
+    write /sys/class/thermal/thermal_message/sconfig 12
+    setprop "baikal.eng.therm.cur_profile" "cool"
+
+
+#on property:baikal.eng.therm.profile=*
+#    setprop "baikal.eng.therm.profile" "default"
+
+
+

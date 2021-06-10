@@ -1,0 +1,30 @@
+on property:persist.baikal.dolby.enable=1
+    enable dms-hal-1-0
+    setprop sys.audio.restart.hal 1
+
+on property:persist.baikal.dolby.enable=0
+    stop dms-hal-1-0
+    setprop sys.audio.restart.hal 1
+
+on property:vendor.post_boot.parsed=1
+    write /sys/fs/selinux/enforce 2
+    
+on property:persist.baikal.ae.disable=0
+    setprop ro.audio.ignore_effects 0
+    setprop sys.audio.restart.hal 1
+
+on property:persist.baikal.ae.disable=1
+    setprop ro.audio.ignore_effects 1
+    setprop sys.audio.restart.hal 1
+
+
+on property:persist.baikal_audio_hq=*
+    setprop sys.audio.restart.hal 1
+
+
+on property:persist.baikal.gpuscale=0
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/devfreq/5000000.qcom,kgsl-3d0/scale_by_refresh_rate" 0
+
+on property:persist.baikal.gpuscale=1
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/devfreq/5000000.qcom,kgsl-3d0/scale_by_refresh_rate" 1
+

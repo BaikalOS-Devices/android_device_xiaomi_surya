@@ -1,0 +1,821 @@
+on boot
+    setprop "baikal.def.balance.csmin" "300000"
+    setprop "baikal.def.balance.csmax" "1804800"
+    setprop "baikal.def.balance.cgmin" "300000"
+    setprop "baikal.def.balance.cgmax" "2304000"
+    setprop "baikal.def.balance.gmin" "180"
+    setprop "baikal.def.balance.gmax" "800"
+    setprop "baikal.def.balance.cc" "0"
+    setprop "baikal.def.balance.schboost" "0"
+    setprop "baikal.def.balance.gpuboost" "0"
+
+    setprop "baikal.def.limited.csmin" "300000"
+    setprop "baikal.def.limited.csmax" "1324800"
+    setprop "baikal.def.limited.cgmin" "300000"
+    setprop "baikal.def.limited.cgmax" "1843200"
+    setprop "baikal.def.limited.gmin" "180"
+    setprop "baikal.def.limited.gmax" "430"
+    setprop "baikal.def.limited.cc" "0"
+    setprop "baikal.def.limited.schboost" "0"
+    setprop "baikal.def.limited.gpuboost" "0"
+
+    setprop "baikal.def.performance.csmin" "768000"
+    setprop "baikal.def.performance.csmax" "1804800"
+    setprop "baikal.def.performance.cgmin" "652800"
+    setprop "baikal.def.performance.cgmax" "2304000"
+    setprop "baikal.def.performance.gmin" "180"
+    setprop "baikal.def.performance.gmax" "800"
+    setprop "baikal.def.performance.cc" "6"
+    setprop "baikal.def.performance.schboost" "5"
+    setprop "baikal.def.performance.gpuboost" "0"
+
+    setprop "baikal.def.battery.csmin" "300000"
+    setprop "baikal.def.battery.csmax" "1248000"
+    setprop "baikal.def.battery.cgmin" "300000"
+    setprop "baikal.def.battery.cgmax" "1324800"
+    setprop "baikal.def.battery.gmin" "180"
+    setprop "baikal.def.battery.gmax" "180"
+    setprop "baikal.def.battery.cc" "0"
+    setprop "baikal.def.battery.schboost" "0"
+    setprop "baikal.def.battery.gpuboost" "0"
+
+    setprop "baikal.def.gaming.csmin" "768000"
+    setprop "baikal.def.gaming.csmax" "1804800"
+    setprop "baikal.def.gaming.cgmin" "652800"
+    setprop "baikal.def.gaming.cgmax" "2304000"
+    setprop "baikal.def.gaming.gmin" "180"
+    setprop "baikal.def.gaming.gmax" "800"
+    setprop "baikal.def.gaming.cc" "6"
+    setprop "baikal.def.gaming.schboost" "5"
+    setprop "baikal.def.gaming.gpuboost" "3"
+
+    setprop "baikal.def.gaming2.csmin" "768000"
+    setprop "baikal.def.gaming2.csmax" "1804800"
+    setprop "baikal.def.gaming2.cgmin" "652800"
+    setprop "baikal.def.gaming2.cgmax" "2304000"
+    setprop "baikal.def.gaming2.gmin" "180"
+    setprop "baikal.def.gaming2.gmax" "800"
+    setprop "baikal.def.gaming2.cc" "6"
+    setprop "baikal.def.gaming2.schboost" "5"
+    setprop "baikal.def.gaming2.gpuboost" "3"
+
+    setprop "baikal.def.cc_off" "6"
+    setprop "baikal.def.cc_on" "0"
+
+# Balance (default profile)
+on property:baikal.eng.perf.profile=balance
+    setprop "baikal.eng.perf.cur_profile" "balance"
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/not_preferred "0 1 1 1 1 1"
+    write /sys/devices/system/cpu/cpu6/core_ctl/not_preferred "1 1"
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 6
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus 2
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq ${persist.bkp.balance.csmax:-1804800}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_max_freq ${persist.bkp.balance.cgmax:-2304000}
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq ${persist.bkp.balance.csmin:-300000}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_min_freq ${persist.bkp.balance.cgmin:-300000}
+
+    # Devfreq
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-l3-lat/devfreq/soc:qcom,cpu6-cpu-l3-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-llcc-lat/devfreq/soc:qcom,cpu0-cpu-llcc-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-llcc-lat/devfreq/soc:qcom,cpu6-cpu-llcc-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-llcc-ddr-lat/devfreq/soc:qcom,cpu6-llcc-ddr-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-llcc-ddr-lat/devfreq/soc:qcom,cpu0-llcc-ddr-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-llcc-ddr-bw/devfreq/soc:qcom,cpu-llcc-ddr-bw/governor" bw_hwmon
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-cpu-llcc-bw/devfreq/soc:qcom,cpu-cpu-llcc-bw/governor" bw_hwmon
+    #write "/sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/min_freq" 0
+
+    #write "/sys/devices/platform/soc/1d84000.ufshc/devfreq/1d84000.ufshc/min_freq" 50000000
+
+
+    # Setup runtime cpusets
+    #write /dev/cpuset/top-app/cpus 0-7
+    #write /dev/cpuset/foreground/cpus 0-5
+    #write /dev/cpuset/background/cpus 0-5
+    #write /dev/cpuset/system-background/cpus 0-5
+    #write /dev/cpuset/restricted/cpus 1-2
+
+
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-5,7
+    #write /dev/cpuset/foreground/boost/cpus 0-7
+    write /dev/cpuset/background/cpus 3-5
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/restricted/cpus 3-5
+
+
+    # Setup default schedTune value for foreground/top-app
+    write /dev/stune/top-app/schedtune.boost ${persist.bkp.balance.schboost:-0}
+    write /dev/stune/top-app/schedtune.prefer_idle 0
+
+    write /dev/stune/foreground/schedtune.boost 0
+    write /dev/stune/foreground/schedtune.prefer_idle 0
+
+    write /dev/stune/background/schedtune.boost 0
+    write /dev/stune/background/schedtune.prefer_idle 0
+
+    write /dev/stune/system-background/schedtune.boost 0
+    write /dev/stune/system-background/schedtune.prefer_idle 0
+
+    write /dev/stune/restricted/schedtune.boost 0
+    write /dev/stune/restricted/schedtune.prefer_idle 0
+
+    # Setup dynamic stune boost
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost 15
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms 500
+    # write /dev/stune/top-app/schedtune.sched_boost 5
+
+    # Setup schedutil ratelimits
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 1500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 1000
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us 1500
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/down_rate_limit_us 500
+
+    # Enable schedutil predicted-load boosting
+    #write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl 0
+    #write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/pl 0
+
+    # Reinit lmkd to reconfigure lmkd properties
+    # setprop lmkd.reinit 1
+
+    # EAS
+    write /proc/sys/kernel/sched_upmigrate 70
+    write /proc/sys/kernel/sched_downmigrate 60
+    write /proc/sys/kernel/sched_walt_rotate_big_tasks 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres "5 5 5 5 5 5"
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres "8 8 8 8 8 8"
+
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_down_thres "5 5"
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_up_thres "8 8"
+
+
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_multiplier ${baikal.debug.cpu0_mul:-100}
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_divider ${baikal.debug.cpu0_div:-75}
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable 1 
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_multiplier ${baikal.debug.cpu6_mul:-100}
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_divider ${baikal.debug.cpu6_div:-80}
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/iowait_boost_enable 1
+
+
+    write /proc/sys/kernel/sched_boost 0
+    #write /proc/sys/kernel/sched_downmigrate 60
+    #write /proc/sys/kernel/sched_upmigrate 80
+    #write /proc/sys/kernel/sched_downmigrate 60
+    #write /proc/sys/kernel/sched_upmigrate 80
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus ${persist.bkp.balance.cc:-0}
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus ${persist.bkp.balance.cc:-0}
+
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800 1:1324800 2:0 3:0 4:0 5:0 6:1843200 7:0"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 100
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/min_clock_mhz" ${persist.bkp.balance.gmin:-180}
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/max_clock_mhz" ${persist.bkp.balance.gmax:-800}
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/devfreq/5000000.qcom,kgsl-3d0/load_mul" ${persist.bkp.balance.gpuboost:-0}
+
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/vfs_cache_pressure 100
+    # write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+# Limited
+on property:baikal.eng.perf.profile=limited
+    setprop "baikal.eng.perf.cur_profile" "limited"
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/not_preferred "0 1 1 1 1 1"
+    write /sys/devices/system/cpu/cpu6/core_ctl/not_preferred "1 1"
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 6
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus 2
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq ${persist.bkp.limited.csmax:-1324800}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_max_freq ${persist.bkp.limited.cgmax:-1843200}
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq ${persist.bkp.limited.csmin:-300000}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_min_freq ${persist.bkp.limited.cgmin:-300000}
+
+    # Devfreq
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-l3-lat/devfreq/soc:qcom,cpu6-cpu-l3-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-llcc-lat/devfreq/soc:qcom,cpu0-cpu-llcc-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-llcc-lat/devfreq/soc:qcom,cpu6-cpu-llcc-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-llcc-ddr-lat/devfreq/soc:qcom,cpu6-llcc-ddr-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-llcc-ddr-lat/devfreq/soc:qcom,cpu0-llcc-ddr-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-llcc-ddr-bw/devfreq/soc:qcom,cpu-llcc-ddr-bw/governor" bw_hwmon
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-cpu-llcc-bw/devfreq/soc:qcom,cpu-cpu-llcc-bw/governor" bw_hwmon
+    #write "/sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/min_freq" 0
+
+    #write "/sys/devices/platform/soc/1d84000.ufshc/devfreq/1d84000.ufshc/min_freq" 50000000
+
+    # Setup runtime cpusets
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-5
+    #write /dev/cpuset/foreground/boost/cpus 0-6
+    write /dev/cpuset/background/cpus 0-5
+    write /dev/cpuset/system-background/cpus 3-5
+    write /dev/cpuset/restricted/cpus 3-5
+
+    # Setup default schedTune value for foreground/top-app
+    write /dev/stune/foreground/schedtune.prefer_idle 0
+    write /dev/stune/top-app/schedtune.boost ${persist.bkp.limited.schboost:-0}
+    write /dev/stune/top-app/schedtune.prefer_idle 0
+
+    # Setup dynamic stune boost
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost 15
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms 500
+    # write /dev/stune/top-app/schedtune.sched_boost 5
+
+    # Setup schedutil ratelimits
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 2500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us 2500
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/down_rate_limit_us 500
+
+    # Enable schedutil predicted-load boosting
+    #write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl 0
+    #write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/pl 0
+
+    # Reinit lmkd to reconfigure lmkd properties
+    # setprop lmkd.reinit 1
+
+    # EAS
+    write /proc/sys/kernel/sched_upmigrate 90
+    write /proc/sys/kernel/sched_downmigrate 70
+    write /proc/sys/kernel/sched_walt_rotate_big_tasks 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres "5 5 5 5 5 5"
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres "15 15 15 30 30 30"
+
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_down_thres "15 15"
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_up_thres "30 30"
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_divider 85
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable 1
+
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_divider 95
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/iowait_boost_enable 1
+
+    write /proc/sys/kernel/sched_boost 0
+    #write /proc/sys/kernel/sched_downmigrate 60
+    #write /proc/sys/kernel/sched_upmigrate 80
+    #write /proc/sys/kernel/sched_downmigrate 60
+    #write /proc/sys/kernel/sched_upmigrate 80
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus ${persist.bkp.limited.cc:-0}
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus ${persist.bkp.limited.cc:-0}
+
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800 1:1324800 2:1324800 3:0 4:0 5:0 6:0 7:0"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 200
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/min_clock_mhz" ${persist.bkp.limited.gmin:-180}
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/max_clock_mhz" ${persist.bkp.limited.gmax:-800}
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/devfreq/5000000.qcom,kgsl-3d0/load_mul"  ${persist.bkp.limited.gpuboost:-0}
+
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/vfs_cache_pressure 100
+    # write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+
+# Performance (based on DrunkSauce Lite)
+on property:baikal.eng.perf.profile=performance
+    setprop "baikal.eng.perf.cur_profile" "performance"
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/not_preferred "0 1 1 1 1 1"
+    write /sys/devices/system/cpu/cpu6/core_ctl/not_preferred "1 1"
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 6
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus 6
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq ${persist.bkp.performance.csmax:-1804800}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_max_freq ${persist.bkp.performance.cgmax:-2304000}
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq ${persist.bkp.performance.csmin:-768000}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_min_freq ${persist.bkp.performance.cgmin:-652800}
+
+    # Devfreq
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-l3-lat/devfreq/soc:qcom,cpu6-cpu-l3-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-llcc-lat/devfreq/soc:qcom,cpu0-cpu-llcc-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-llcc-lat/devfreq/soc:qcom,cpu6-cpu-llcc-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-llcc-ddr-lat/devfreq/soc:qcom,cpu6-llcc-ddr-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-llcc-ddr-lat/devfreq/soc:qcom,cpu0-llcc-ddr-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-llcc-ddr-bw/devfreq/soc:qcom,cpu-llcc-ddr-bw/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-cpu-llcc-bw/devfreq/soc:qcom,cpu-cpu-llcc-bw/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/min_freq" 6881
+
+    #write "/sys/devices/platform/soc/1d84000.ufshc/devfreq/1d84000.ufshc/min_freq" 200000000
+
+    # Setup runtime cpusets
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-5
+    #write /dev/cpuset/foreground/boost/cpus 0-7
+    write /dev/cpuset/background/cpus 0-5
+    write /dev/cpuset/system-background/cpus 0-5
+    write /dev/cpuset/restricted/cpus 2-5
+
+    # Setup default schedTune value for foreground/top-app
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost ${persist.bkp.performance.schboost:-5}
+    write /dev/stune/top-app/schedtune.prefer_idle 1
+
+    # Setup dynamic stune boost
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost 15
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms 500
+    # write /dev/stune/top-app/schedtune.sched_boost 15
+
+    # Setup schedutil ratelimits
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/down_rate_limit_us 20000
+
+    # Enable schedutil predicted-load boosting
+    #write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl 1
+    #write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/pl 1
+
+    # Reinit lmkd to reconfigure lmkd properties
+    # setprop lmkd.reinit 1
+
+    # EAS
+    write /proc/sys/kernel/sched_upmigrate 50
+    write /proc/sys/kernel/sched_downmigrate 40
+    write /proc/sys/kernel/sched_walt_rotate_big_tasks 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres "5 5 5 5 5 5"
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres "8 8 8 8 8 8"
+
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_down_thres "5 5"
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_up_thres "8 8"
+
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_divider 80
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable 1
+
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_divider 80
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/iowait_boost_enable 1
+
+    write /proc/sys/kernel/sched_boost 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus ${persist.bkp.performance.cc:-6}
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus ${persist.bkp.performance.cc:-6}
+
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800 1:1324800 2:1324800 3:0 4:0 5:0 6:0 7:0"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 200
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/min_clock_mhz" ${persist.bkp.performance.gmin:-180}
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/max_clock_mhz" ${persist.bkp.performance.gmax:-800}
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/devfreq/5000000.qcom,kgsl-3d0/load_mul"  ${persist.bkp.performance.gpuboost:-0}
+
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/vfs_cache_pressure 100
+    # write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+# Battery
+on property:baikal.eng.perf.profile=battery
+    setprop "baikal.eng.perf.cur_profile" "battery"
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/not_preferred "0 1 1 1 1 1"
+    write /sys/devices/system/cpu/cpu6/core_ctl/not_preferred "1 1"
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 6
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus 2
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq ${persist.bkp.battery.csmax:-1248000}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_max_freq ${persist.bkp.battery.cgmax:-1324800}
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq ${persist.bkp.battery.csmin:-300000}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_min_freq ${persist.bkp.battery.cgmin:-300000}
+
+    # Devfreq
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-l3-lat/devfreq/soc:qcom,cpu6-cpu-l3-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-llcc-lat/devfreq/soc:qcom,cpu0-cpu-llcc-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-llcc-lat/devfreq/soc:qcom,cpu6-cpu-llcc-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-llcc-ddr-lat/devfreq/soc:qcom,cpu6-llcc-ddr-lat/governor" mem_latency
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-llcc-ddr-lat/devfreq/soc:qcom,cpu0-llcc-ddr-lat/governor" mem_latency
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-llcc-ddr-bw/devfreq/soc:qcom,cpu-llcc-ddr-bw/governor" bw_hwmon
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-cpu-llcc-bw/devfreq/soc:qcom,cpu-cpu-llcc-bw/governor" bw_hwmon
+    #write "/sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/min_freq" 0
+
+    #write "/sys/devices/platform/soc/1d84000.ufshc/devfreq/1d84000.ufshc/min_freq" 50000000
+
+    # Setup runtime cpusets
+    write /dev/cpuset/top-app/cpus 0-6
+    write /dev/cpuset/foreground/cpus 0-3
+    #write /dev/cpuset/foreground/boost/cpus 0-6
+    write /dev/cpuset/background/cpus 4-5
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/restricted/cpus 2-3
+
+    # Setup default schedTune value for foreground/top-app
+    write /dev/stune/foreground/schedtune.prefer_idle 0
+    write /dev/stune/top-app/schedtune.boost ${persist.bkp.battery.schboost:-0}
+    write /dev/stune/top-app/schedtune.prefer_idle 0
+
+    # Setup dynamic stune boost
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost 15
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms 500
+    # write /dev/stune/top-app/schedtune.sched_boost 0
+
+    # Setup schedutil ratelimits
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/down_rate_limit_us 500
+
+    # Enable schedutil predicted-load boosting
+    #write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl 0
+    #write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/pl 0
+
+    # Reinit lmkd to reconfigure lmkd properties
+    # setprop lmkd.reinit 1
+
+    # EAS
+    write /proc/sys/kernel/sched_upmigrate 95
+    write /proc/sys/kernel/sched_downmigrate 90
+    write /proc/sys/kernel/sched_walt_rotate_big_tasks 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres "5 5 70 70 70 70"
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres "10 10 80 80 80 80"
+
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_down_thres "20 20"
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_up_thres "30 30"
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_divider 95
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable 0
+
+                                                                             
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_divider 95
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/iowait_boost_enable 0
+
+
+    write /proc/sys/kernel/sched_boost 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus ${persist.bkp.battery.cc:-0}
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus ${persist.bkp.battery.cc:-0}
+
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:0 1:0 2:0 3:0 4:0 5:0 6:0 7:0"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 10
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/min_clock_mhz" ${persist.bkp.battery.gmin:-180}
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/max_clock_mhz" ${persist.bkp.battery.gmax:-180}
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/devfreq/5000000.qcom,kgsl-3d0/load_mul"  ${persist.bkp.battery.gpuboost:-0}
+
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/vfs_cache_pressure 100
+    # write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+# Gaming
+on property:baikal.eng.perf.profile=gaming
+    setprop "baikal.eng.perf.cur_profile" "gaming"
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/not_preferred "0 1 1 1 1 1"
+    write /sys/devices/system/cpu/cpu6/core_ctl/not_preferred "0 1"
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 6
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus 2
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq ${persist.bkp.gaming.csmax:-1804800}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_max_freq ${persist.bkp.gaming.cgmax:-2304000}
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq ${persist.bkp.gaming.csmin:-768000}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_min_freq ${persist.bkp.gaming.cgmin:-652800}
+
+    # Devfreq
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-l3-lat/devfreq/soc:qcom,cpu6-cpu-l3-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-llcc-lat/devfreq/soc:qcom,cpu0-cpu-llcc-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-llcc-lat/devfreq/soc:qcom,cpu6-cpu-llcc-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-llcc-ddr-lat/devfreq/soc:qcom,cpu6-llcc-ddr-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-llcc-ddr-lat/devfreq/soc:qcom,cpu0-llcc-ddr-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-llcc-ddr-bw/devfreq/soc:qcom,cpu-llcc-ddr-bw/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-cpu-llcc-bw/devfreq/soc:qcom,cpu-cpu-llcc-bw/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/min_freq" 6881
+
+    #write "/sys/devices/platform/soc/1d84000.ufshc/devfreq/1d84000.ufshc/min_freq" 200000000
+
+    # Setup runtime cpusets
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-4
+    #write /dev/cpuset/foreground/boost/cpus 0-7
+    write /dev/cpuset/background/cpus 0-3
+    write /dev/cpuset/system-background/cpus 0-4
+    write /dev/cpuset/restricted/cpus 4-5
+
+    # Setup default schedTune value for foreground/top-app
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost ${persist.bkp.gaming.schboost:-5}
+    write /dev/stune/top-app/schedtune.prefer_idle 1
+
+    # Setup dynamic stune boost
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost 15
+    # write /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms 500
+    # write /dev/stune/top-app/schedtune.sched_boost 15
+
+    # Setup schedutil ratelimits
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/down_rate_limit_us 20000
+
+    # Enable schedutil predicted-load boosting
+    #write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl 1
+    #write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/pl 1
+
+    # Reinit lmkd to reconfigure lmkd properties
+    # setprop lmkd.reinit 1
+
+    # EAS
+    write /proc/sys/kernel/sched_upmigrate 50
+    write /proc/sys/kernel/sched_downmigrate 40
+    write /proc/sys/kernel/sched_walt_rotate_big_tasks 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres "5 5 5 5 5 5"
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres "8 8 8 8 8 8"
+
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_down_thres "5 5"
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_up_thres "8 8"
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_divider 70
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable 1
+
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_divider 70
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/iowait_boost_enable 1
+
+    write /proc/sys/kernel/sched_boost 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus ${persist.bkp.gaming.cc:-6}
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus ${persist.bkp.gaming.cc:-6}
+
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800 1:1324800 2:1324800 3:1324800 4:1324800 5:1324800 6:1843200 7:1843200"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 2000
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/min_clock_mhz" ${persist.bkp.gaming.gmin:-180}
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/max_clock_mhz" ${persist.bkp.gaming.gmax:-800}
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/devfreq/5000000.qcom,kgsl-3d0/load_mul" ${persist.bkp.gaming.gpuboost:-3}
+
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/vfs_cache_pressure 100
+    # write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+# Gaming2
+on property:baikal.eng.perf.profile=gaming2
+    setprop "baikal.eng.perf.cur_profile" "gaming2"
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/not_preferred "0 1 1 1 1 1"
+    write /sys/devices/system/cpu/cpu6/core_ctl/not_preferred "0 1"
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 6
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus 6
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/enable 1
+    write /sys/devices/system/cpu/cpu6/core_ctl/enable 1
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq ${persist.bkp.gaming2.csmax:-1804800}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_max_freq ${persist.bkp.gaming2.cgmax:-2304000}
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq ${persist.bkp.gaming2.csmin:-768000}
+    write /sys/devices/system/cpu/cpu6/cpufreq/scaling_min_freq ${persist.bkp.gaming2.cgmin:-652800}
+
+    # Devfreq
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-l3-lat/devfreq/soc:qcom,cpu0-cpu-l3-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-l3-lat/devfreq/soc:qcom,cpu6-cpu-l3-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-cpu-llcc-lat/devfreq/soc:qcom,cpu0-cpu-llcc-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-cpu-llcc-lat/devfreq/soc:qcom,cpu6-cpu-llcc-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu6-llcc-ddr-lat/devfreq/soc:qcom,cpu6-llcc-ddr-lat/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu0-llcc-ddr-lat/devfreq/soc:qcom,cpu0-llcc-ddr-lat/governor" performance
+
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-llcc-ddr-bw/devfreq/soc:qcom,cpu-llcc-ddr-bw/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,cpu-cpu-llcc-bw/devfreq/soc:qcom,cpu-cpu-llcc-bw/governor" performance
+    #write "/sys/devices/platform/soc/soc:qcom,npu-npu-ddr-bw/devfreq/soc:qcom,npu-npu-ddr-bw/min_freq" 6881
+
+    #write "/sys/devices/platform/soc/1d84000.ufshc/devfreq/1d84000.ufshc/min_freq" 200000000
+
+    # Setup runtime cpusets
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-5
+    #write /dev/cpuset/foreground/boost/cpus 0-7
+    write /dev/cpuset/background/cpus 3-5
+    write /dev/cpuset/system-background/cpus 0-4
+    write /dev/cpuset/restricted/cpus 4-5
+                                       
+    # Setup default schedTune value for foreground/top-app
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost ${persist.bkp.gaming2.schboost:-5}
+    write /dev/stune/top-app/schedtune.prefer_idle 1
+
+    # Setup dynamic stune boost
+    #write /sys/module/cpu_boost/parameters/dynamic_stune_boost 15
+    #write /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms 500
+    #write /dev/stune/top-app/schedtune.sched_boost 15
+
+    # Setup schedutil ratelimits
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/down_rate_limit_us 20000
+
+    # Enable schedutil predicted-load boosting
+    #write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/pl 1
+    #write /sys/devices/system/cpu/cpu6/cpufreq/schedutil/pl 1
+
+    # Reinit lmkd to reconfigure lmkd properties
+    # setprop lmkd.reinit 1
+
+    # EAS
+    write /proc/sys/kernel/sched_upmigrate 50
+    write /proc/sys/kernel/sched_downmigrate 40
+    write /proc/sys/kernel/sched_walt_rotate_big_tasks 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres "5 5 5 5 5 5"
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres "8 8 8 8 8 8"
+
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_down_thres "5 5"
+    write /sys/devices/system/cpu/cpu6/core_ctl/busy_up_thres "8 8"
+
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/scaling_divider 60
+    write /sys/devices/system/cpu/cpufreq/policy0/schedutil/iowait_boost_enable 1
+
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_multiplier 100
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/scaling_divider 60
+    write /sys/devices/system/cpu/cpufreq/policy6/schedutil/iowait_boost_enable 1
+
+    write /proc/sys/kernel/sched_boost 0
+
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus ${persist.bkp.gaming2.cc:-6}
+    write /sys/devices/system/cpu/cpu6/core_ctl/min_cpus ${persist.bkp.gaming2.cc:-6}
+
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1324800 1:1324800 2:1324800 3:1324800 4:1324800 5:1324800 6:1843200 7:1843200"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 2000
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/min_clock_mhz" ${persist.bkp.gaming2.gmin:-180}
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/kgsl/kgsl-3d0/max_clock_mhz" ${persist.bkp.gaming2.gmax:-800}
+
+    write "/sys/devices/platform/soc/5000000.qcom,kgsl-3d0/devfreq/5000000.qcom,kgsl-3d0/load_mul"  ${persist.bkp.gaming2.gpuboost:-3}
+
+    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/vfs_cache_pressure 100
+
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+

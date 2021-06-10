@@ -1,0 +1,142 @@
+on property:vendor.post_boot.parsed=*
+    setprop "baikal.perf.profile" "default"
+    setprop "baikal.therm.profile" "default"
+
+#Perfroamnce framework to device map
+on property:persist.baikal.perf.default=*
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" ${persist.baikal.perf.default:-"balance"}
+
+on property:baikal.perf.profile=default
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" ${persist.baikal.perf.default:-"balance"}
+
+on property:baikal.perf.profile=balance
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "balance"
+
+on property:baikal.perf.profile=limited
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "limited"
+
+on property:baikal.perf.profile=video
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "video"
+
+on property:baikal.perf.profile=performance
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "performance"
+
+on property:baikal.perf.profile=gaming
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "gaming"
+
+on property:baikal.perf.profile=gaming2
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "gaming2"
+
+on property:baikal.perf.profile=battery
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "battery"
+
+on property:baikal.perf.profile=reader
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "battery"
+
+on property:baikal.perf.profile=reader
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" "battery"
+
+on property:persist.baikal.perf.scr_off=*
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.scr_off" ${persist.baikal.perf.scr_off:-"limited"}
+
+on property:baikal.eng.perf.scr_off=default
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.scr_off" ${persist.baikal.perf.default:-"balance"}
+
+on property:baikal.perf.profile=screen_off
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" ${baikal.eng.perf.scr_off:-"limited"}
+
+on property:persist.baikal.perf.idle=*
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.idle" ${persist.baikal.perf.idle:-"limited"}
+
+on property:baikal.eng.perf.idle=default
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.idle" ${persist.baikal.perf.default:-"balance"}
+
+on property:baikal.perf.profile=idle
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.perf.profile" ${baikal.eng.perf.idle:-"limited"}
+
+#on property:baikal.perf.profile=boost
+#    setprop "baikal.eng.perf.profile" "temporary"
+#    setprop "baikal.eng.perf.profile" "balance"
+
+#Thermal framework to device map
+
+on property:persist.baikal.therm.default=*
+    setprop "baikal.eng.therm.profile" "temporary"
+    setprop "baikal.eng.therm.profile" ${persist.baikal.therm.default:-"balance"}
+
+on property:baikal.therm.profile=default
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" ${persist.baikal.therm.default:-"balance"}
+
+on property:baikal.therm.profile=balance
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "balance"
+
+on property:baikal.therm.profile=gaming
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "gaming"
+
+on property:baikal.therm.profile=gaming2
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "gaming2"
+
+on property:baikal.therm.profile=nolimits
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "nolimits"
+
+on property:baikal.therm.profile=cool
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "cool"
+
+on property:baikal.therm.profile=cold
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "cold"
+
+on property:baikal.therm.profile=camera
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "camera"
+
+on property:baikal.therm.profile=high
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "high"
+
+on property:baikal.therm.profile=incall
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "incall"
+
+on property:baikal.therm.profile=vr
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" "vr"
+
+on property:baikal.therm.profile=screen_off
+    setprop "baikal.eng.perf.profile" "temporary"
+    setprop "baikal.eng.therm.profile" ${baikal.eng.therm.idle:-"cool"}
+
+on property:persist.baikal.therm.idle=*
+    setprop "baikal.eng.therm.profile" "temporary"
+    setprop "baikal.eng.therm.idle" ${persist.baikal.therm.idle:-"cool"}
+
+on property:baikal.eng.therm.idle=default
+    setprop "baikal.eng.therm.profile" "temporary"
+    setprop "baikal.eng.therm.idle" ${persist.baikal.therm.default:-"cool"}
+
+on property:baikal.therm.profile=idle
+    setprop "baikal.eng.therm.profile" "temporary"
+    setprop "baikal.eng.therm.profile" ${baikal.eng.therm.idle:-"cool"}
