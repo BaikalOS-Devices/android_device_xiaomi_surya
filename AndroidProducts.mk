@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aicp_surya.mk
+    $(LOCAL_DIR)/baikalos_surya.mk
 
 COMMON_LUNCH_CHOICES := \
-    aicp_surya-user \
-    aicp_surya-userdebug \
-    aicp_surya-eng
+    baikalos_surya-user \
+    baikalos_surya-userdebug \
+    baikalos_surya-eng

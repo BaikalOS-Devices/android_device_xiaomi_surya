@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="performance_default">Default</string>
+    <string name="performance_balance">Balanced</string>
+    <string name="performance_battery">Battery</string>
+    <string name="performance_performance">Performance</string>
+    <string name="performance_gaming">Gaming</string>
+    <string name="performance_gaming2">Gaming 2</string>
+    <string name="performance_camera">Camera</string>
+
+    <string name="thermal_default">Default</string>
+    <string name="thermal_balance">Balanced</string>
+    <string name="thermal_performance">Performance</string>
+    <string name="thermal_gaming">Gaming</string>
+    <string name="thermal_gaming2">Gaming 2 (PUBG HD)</string>
+    <string name="thermal_nolimits">No Limits</string>
+    <string name="thermal_high">High</string>
+    <string name="thermal_camera">Camera</string>
+    <string name="thermal_reader">Reader</string>
+    <string name="thermal_cool">Cool</string>
+    <string name="thermal_cold">Cold</string>
+    <string name="thermal_incall">In Call</string>
+    <string name="thermal_vr">VR</string>
+
+</resources>

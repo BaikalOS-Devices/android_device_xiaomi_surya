@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="performance_listentries">
+    	<item>@string/performance_default</item>
+    	<item>@string/performance_balance</item>
+    	<item>@string/performance_limited</item>
+    	<item>@string/performance_performance</item>
+    	<item>@string/performance_gaming</item>
+    	<item>@string/performance_gaming2</item>
+    	<item>@string/performance_battery</item>
+     </string-array>
+     <string-array name="performance_listvalues">
+    	<item>default</item>
+    	<item>balance</item>
+    	<item>limited</item>
+    	<item>performance</item>
+    	<item>gaming</item>
+    	<item>gaming2</item>
+    	<item>battery</item>
+    </string-array>
+
+    <string-array name="thermal_listentries">
+    	<item>@string/thermal_default</item>
+    	<item>@string/thermal_balance</item>
+    	<item>@string/thermal_gaming</item>
+    	<item>@string/thermal_nolimits</item>
+    	<item>@string/thermal_cool</item>
+    	<item>@string/thermal_camera</item>
+    	<item>@string/thermal_incall</item>
+     </string-array>
+     <string-array name="thermal_listvalues">
+    	<item>default</item>
+    	<item>balance</item>
+    	<item>gaming</item>
+    	<item>nolimits</item>
+    	<item>cool</item>
+    	<item>camera</item>
+    	<item>incall</item>
+    </string-array>
+
+    <string-array name="cpu_silver_freqs">
+        <item>300000</item>
+        <item>576000</item>
+        <item>768000</item>
+        <item>1017600</item>
+        <item>1248000</item>
+        <item>1324800</item>
+        <item>1497600</item>
+        <item>1612800</item>
+        <item>1708800</item>
+        <item>1804800</item>
+    </string-array>
+
+    <string-array name="cpu_gold_freqs">
+        <item>300000</item>
+        <item>652800</item>
+        <item>806400</item>
+        <item>979200</item>
+        <item>1094400</item>
+        <item>1209600</item>
+        <item>1324800</item>
+        <item>1555200</item>
+        <item>1708800</item>
+        <item>1843200</item>
+        <item>1939200</item>
+        <item>2169600</item>
+        <item>2208000</item>
+        <item>2304000</item>
+    </string-array>
+
+    <string-array name="gpu_freqs">
+        <item>180</item>
+        <item>267</item>
+        <item>355</item>
+        <item>430</item>
+        <item>565</item>
+        <item>650</item>
+        <item>800</item>
+    </string-array>
+
+</resources>

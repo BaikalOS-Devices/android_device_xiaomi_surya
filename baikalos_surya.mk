@@ -22,19 +22,24 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, device/xiaomi/surya/device.mk)
 
 # Inherit some common AICP stuff.
-$(call inherit-product, vendor/aicp/config/common_full_phone.mk)
+$(call inherit-product, vendor/baikalos/config/common_full_phone.mk)
 
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
 
 # Device identifier
-PRODUCT_NAME := aicp_surya
+PRODUCT_NAME := baikalos_surya
 PRODUCT_DEVICE := surya
 PRODUCT_BRAND := POCO
 PRODUCT_MODEL := POCO X3
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
-# Fingerprint
+DEVICE_MAINTAINER := svasiliev22
+
+BUILD_FINGERPRINT := POCO/surya_eea/surya:11/RKQ1.200826.002/V12.0.6.4.RJGEUXM:user/release-keys
+TARGET_INCLUDE_PIXEL_CHARGER := true
+
 PRODUCT_OVERRIDE_INFO := true
-PRODUCT_OVERRIDE_FINGERPRINT := google/sunfish/sunfish:11/RQ2A.210505.002/7246365:user/release-keys
+PRODUCT_OVERRIDE_FINGERPRINT := Xiaomi/dipper/dipper:8.1.0/OPM1.171019.011/V9.5.5.0.OEAMIFA:user/release-keys
+PRODUCT_OVERRIDE_DESC := "dipper-user 8.1.0 OPM1.171019.011 V9.5.5.0.OEAMIFA release-keys"

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-/*
-** Copyright 2012, The Android Open Source Project
+/* //device/apps/common/assets/res/any/strings.xml
+**
+** Copyright 2006, The Android Open Source Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -16,20 +17,8 @@
 ** limitations under the License.
 */
 -->
-
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-    <!-- Height of the status bar -->
-    <dimen name="status_bar_height_portrait">112.0px</dimen>
-    <dimen name="status_bar_height_landscape">28.0dp</dimen>
-
-    <!-- Radius of the software rounded corners at the top of the display in its natural
-        orientation. If zero, the value of rounded_corner_radius is used. -->
-    <dimen name="rounded_corner_radius_top">90.0px</dimen>
-
-    <!-- Radius of the software rounded corners at the bottom of the display in its natural
-        orientation. If zero, the value of rounded_corner_radius is used. -->
-    <dimen name="rounded_corner_radius_bottom">90.0px</dimen>
-
-
+    <!-- When the lock screen is showing and the phone plugged in, and the battery
+         is not fully charged, and it's plugged into a fast charger, say that it's charging fast.  -->
+    <string name="keyguard_plugged_in_charging_fast"><xliff:g id="percentage">%s</xliff:g> • Turbo charging</string>
 </resources>

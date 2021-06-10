@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string-array name="default_performance_listentries">
+    	<item>@string/performance_balance</item>
+    	<item>@string/performance_limited</item>
+    	<item>@string/performance_performance</item>
+    	<item>@string/performance_gaming</item>
+    	<item>@string/performance_gaming2</item>
+    	<item>@string/performance_battery</item>
+     </string-array>
+     <string-array name="default_performance_listvalues">
+    	<item>balance</item>
+    	<item>limited</item>
+    	<item>performance</item>
+    	<item>gaming</item>
+    	<item>gaming2</item>
+    	<item>battery</item>
+    </string-array>
+
+    <string-array name="default_thermal_listentries">
+    	<item>@string/thermal_balance</item>
+    	<item>@string/thermal_gaming</item>
+    	<item>@string/thermal_nolimits</item>
+    	<item>@string/thermal_cool</item>
+    	<item>@string/thermal_camera</item>
+    	<item>@string/thermal_incall</item>
+     </string-array>
+     <string-array name="default_thermal_listvalues">
+    	<item>balance</item>
+    	<item>gaming</item>
+    	<item>nolimits</item>
+    	<item>cool</item>
+    	<item>camera</item>
+    	<item>incall</item>
+    </string-array>
+
+</resources>
