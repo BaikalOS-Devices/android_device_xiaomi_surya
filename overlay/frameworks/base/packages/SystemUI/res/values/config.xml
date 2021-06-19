@@ -46,6 +46,7 @@
 
     <!-- FPSInfoService FPS node file path -->
     <string name="config_fpsInfoSysNode" translatable="false">/sys/class/drm/sde-crtc-0/measured_fps</string>
+    <string name="config_rrInfoSysNode" translatable="false">/sys/devices/platform/soc/soc:qcom,dsi-display/current_refresh_rate</string>
 
     <!-- The CPU temperature sensor path, defaults to empty -->
     <string name="config_cpuTempSensor" translatable="false">/sys/devices/virtual/thermal/thermal_zone26/temp</string>
@@ -72,7 +73,7 @@
     <string name="config_sysTempSensor" translatable="false">/sys/devices/virtual/thermal/thermal_zone42/temp</string>
 
     <!-- The BAT temperature sensor path, defaults to empty -->
-    <string name="config_batTempSensor" translatable="false">/sys/devices/virtual/thermal/thermal_zone81/temp</string>
+    <string name="config_batTempSensor" translatable="false">/sys/devices/virtual/thermal/thermal_zone79/temp</string>
 
     <string name="config_gpuFreqSensor" translatable="false">/sys/kernel/gpu/gpu_clock</string>
 
