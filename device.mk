@@ -17,6 +17,9 @@ $(call inherit-product, vendor/xiaomi/surya/surya-vendor.mk)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
 
+PRODUCT_PACKAGES += \
+    tinymix
+
 # Camera
 PRODUCT_PACKAGES += \
     libmedia_jni_shim
@@ -132,7 +135,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay@2.0-service-sdm
 
-
 # Init
 PRODUCT_PACKAGES += \
     init.device.rc \
@@ -141,114 +143,4 @@ PRODUCT_PACKAGES += \
     init.performance.rc \
     init.thermal.rc
 
-
-# BaikalService 
-PRODUCT_PRODUCT_PROPERTIES += \
-    baikal.eng.perf=1 \
-    baikal.eng.therm=1 \
-    baikal.eng.perf.edit=1
-
-# Baikal Effects
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.baikal.ae.disable=0 \
-    persist.baikal.qcae.disable=0 \
-    persist.baikal.dolby.enable=0 \
-    persist.baikal.fps.default=4 \
-    sys.baikal.dolby.avail=0 \
-    sys.baikal.qcae.avail=1  \
-    sys.baikal.reader=1 \
-    sys.baikal.var_fps=1
-
-# Baikal Maintainer
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.baikalos.maintainer=svasiliev22
-
-PRODUCT_PRODUCT_PROPERTIES += \
-    baikal.last.a2dp_codec=NONE \
-    baikal.last.a2dp_bitrate=0
-
-#Fully optimize on install
-PRODUCT_PRODUCT_PROPERTIES += \
-    pm.dexopt.install=speed-profile \
-    pm.dexopt.bg-dexopt=speed-profile \
-    pm.dexopt.boot=verify \
-    pm.dexopt.first-boot=speed-profile \
-    pm.dexopt.ab-ota=speed-profile \
-    dalvik.vm.dex2oat-filter=speed-profile \
-    dalvik.vm.image-dex2oat-filter=speed-profile \
-    ro.vendor.qti.am.reschedule_service=true \
-    ro.sys.fw.dex2oat_thread_count=8 \
-    dalvik.vm.boot-dex2oat-threads=8 \
-    dalvik.vm.dex2oat-threads=8 \
-    dalvik.vm.image-dex2oat-threads=8 \
-    dalvik.vm.dex2oat-cpu-set=0-8
-
-
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.control_privapp_permissions=log
-
-#Vendor props
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.vendor.smart_dfps.enable=0 \
-    persist.vendor.power.dfps.level=0
-
-# IORap
-PRODUCT_PROPERTY_OVERRIDES += \
-    iorapd.perfetto.enable=true \
-    iorapd.readahead.enable=true
-
-# Perf
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.perf.scroll_opt=true
-
-# Zygote
-PRODUCT_PROPERTY_OVERRIDES += \
-     persist.device_config.runtime_native.usap_pool_enabled=true
-
-
-# Disable smart fps switching
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.vendor.smart_dfps.enable=false
-
-# Enable inband ringing
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.bluetooth.disableinbandringing=false
-
-# Enable blurs
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.surface_flinger.supports_background_blur=1 \
-    ro.sf.blurs_are_expensive=1 \
-    debug.sf.latch_unsignaled=1 \
-    debug.sf.disable_backpressure=1
-
-#    debug.hwui.renderer=skiavk \
-
-# Graphics
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
-    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
-    vendor.display.disable_rotator_downscale=1 \
-    debug.sf.disable_backpressure=1 \
-    debug.sf.latch_unsignaled=1 \
-    debug.sf.show_predicted_vsync=1 \
-    debug.sf.vsync_reactor=1 \
-    debug.sf.use_frame_rate_priority=1 \
-    debug.sf.use_frame_rate_api=1 \
-    debug.sf.use_content_detection_v2=1 \
-    persist.sys.sf.color_saturation=1.0 \
-    ro.surface_flinger.set_display_power_timer_ms=5000 \
-    ro.surface_flinger.set_idle_timer_ms=2000 \
-    ro.surface_flinger.set_touch_timer_ms=1000 \
-    ro.surface_flinger.use_content_detection_for_refresh_rate=true \
-    vendor.display.disable_idle_time_hdr=1 \
-    vendor.display.disable_idle_time_video=1 \
-    vendor.display.idle_time=1100 \
-
-
-# Camera
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.camera.privapp.list=org.codeaurora.snapcam,org.lineageos.snap,com.android.camera \
-    persist.vendor.camera.privapp.list=org.codeaurora.snapcam,org.lineageos.snap,com.android.camera \
-    vendor.camera.aux.packagelist=org.codeaurora.snapcam,org.lineageos.snap,com.android.camera \
-    vendor.camera.aux.packagelist.ext=org.codeaurora.snapcam,org.lineageos.snap,com.android.camera \
 
