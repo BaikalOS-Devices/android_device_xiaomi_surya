@@ -112,6 +112,12 @@
          turned off and the screen off animation has been performed. -->
     <bool name="config_dozeAfterScreenOffByDefault">true</bool>
 
+
+    <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx. -->
+    <integer-array name="config_availableColorModes">
+    </integer-array>
+
+
     <!-- Use default display mode -->
     <integer name="config_defaultLiveDisplayMode">38</integer>
 
