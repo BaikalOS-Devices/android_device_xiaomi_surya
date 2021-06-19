@@ -79,6 +79,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Properties
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
+# Properties
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/baikalos.prop
+
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 
@@ -89,8 +92,8 @@ VENDOR_SECURITY_PATCH := 2021-04-01
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 # Shims
-TARGET_LD_SHIM_LIBS := \
-    system/lib/libcameraservice.so|libmedia_jni_shim.so
+#TARGET_LD_SHIM_LIBS := \
+#    system/lib/libcameraservice.so|libmedia_jni_shim.so
 
 # Verified Boot
 BOARD_AVB_VBMETA_SYSTEM := system system_ext product
